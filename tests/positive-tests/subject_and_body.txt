@@ -1,0 +1,9 @@
+This is a perfectly fine commit message
+
+The body does not break any of the rules imposed. (Well, there's also
+only rule, i.e., the 72 character per line rule.)
+
+Here is some markup:
+ - First a simple bullet.
+ - Then we have a multiline bullet which spans, well, at least more than
+   one line.
