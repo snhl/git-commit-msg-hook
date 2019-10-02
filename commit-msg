@@ -6,10 +6,20 @@
 from sys import argv, exit
 
 commit_file = open(argv[1], 'r')
-subject = commit_file.readline().rstrip('\n')
-blank   = commit_file.readline()
-message = commit_file.readlines()
-first_word = subject.split(' ')[0]
+
+# Discard comments, i.e., all lines starting with #.
+lines = []
+for line in commit_file.readlines():
+    if not line.startswith('#'):
+        lines.append(line.rstrip('\n'))
+
+subject = lines[0]
+blank = ''
+message = []
+
+if len(lines) > 1:
+    blank = lines[1]
+    message = lines[2:]
 
 # Our own rule: The commit message should start with the subject line.
 if not len(subject) > 0:
@@ -27,6 +37,7 @@ if len(subject) > 50:
     exit(1)
 
 # Rule 3
+first_word = subject.split(' ')[0]
 if not first_word.istitle():
     print("The subject line is not capitalized")
     exit(1)
